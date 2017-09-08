@@ -3,6 +3,10 @@ syntax on
 autocmd Filetype html setlocal ts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sw=2
+set tabstop=2 shiftwidth=2 softtabstop=2
+set autoindent  " indent on enter
+set smartindent " do smart indenting when starting a new line
+set shiftround  " indent to the closest shiftwidth
 
 autocmd BufNewFile,BufRead *_spec.rb set syntax=rspec
 autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
@@ -36,8 +40,27 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" Always show the status line
-set laststatus=2
+au BufWritePost .vimrc so $MYVIMRC
+
+set ls=2  " show a status line even if there's only one window
+
+" Improve vim's scrolling speed
+set ttyfast
+set ttyscroll=3
+set lazyredraw
+
+set nobackup      " don't want no backup files
+set nowritebackup " don't make a backup before overwriting a file
+set noswapfile    " no swap files
+
+
+" Auto-reload buffers when files are changed on disk
+set autoread
+
+set undofile            " Save undo's after file closes
+set undodir=~/.vim/undo " where to save undo histories
+set undolevels=1000     " How many undos
+set undoreload=10000    " number of lines to save for undo
 
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
@@ -48,9 +71,6 @@ fun! CleanExtraSpaces()
 endfun
 
 set cursorline          " highlight current line
-
-set undofile
-set undodir=~/.vim/undodir
 
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
