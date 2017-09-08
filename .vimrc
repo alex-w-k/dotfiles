@@ -8,6 +8,17 @@ set autoindent  " indent on enter
 set smartindent " do smart indenting when starting a new line
 set shiftround  " indent to the closest shiftwidth
 
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
 autocmd BufNewFile,BufRead *_spec.rb set syntax=rspec
 autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
 
