@@ -124,6 +124,7 @@ Plugin 'tpope/vim-cucumber'
 Plugin 'rhysd/vim-crystal'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'tpope/vim-dotenv'
+Plugin 'markcornick/vim-kitchen'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
