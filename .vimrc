@@ -20,6 +20,7 @@ function! XTermPasteBegin()
 endfunction
 
 autocmd BufNewFile,BufRead *_spec.rb set syntax=rspec
+autocmd BufNewFile,BufRead *_test.rb set syntax=rspec
 autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
 
 set nu
@@ -120,6 +121,9 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tpope/vim-bundler'
 Plugin 'vadv/vim-chef'
 Plugin 'tpope/vim-cucumber'
+Plugin 'rhysd/vim-crystal'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'tpope/vim-dotenv'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
