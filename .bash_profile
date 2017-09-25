@@ -18,6 +18,7 @@ alias ~="cd ~"                                  # Go home and whatnot
 alias bp="vim ~/.bash_profile"                  # Edit this file
 alias src="source ~/.bash_profile"              # Reload this file!
 alias ls='ls -GFh'
+alias config='/usr/bin/git --git-dir=/Users/alexkoch/.cfg/ --work-tree=/Users/alexkoch'
 # ---------------------------------------------------------------------------
 # Colorize!
 # ---------------------------------------------------------------------------
@@ -58,4 +59,3 @@ if [ -f '/Users/alexkoch/google-cloud-sdk/path.bash.inc' ]; then source '/Users/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/alexkoch/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/alexkoch/google-cloud-sdk/completion.bash.inc'; fi
-alias config='/usr/bin/git --git-dir=/Users/alexkoch/.cfg/ --work-tree=/Users/alexkoch'
