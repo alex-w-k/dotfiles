@@ -1,4 +1,6 @@
 syntax on
+set nocompatible
+filetype off
 
 autocmd Filetype html setlocal ts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sw=2
@@ -25,7 +27,6 @@ autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
 
 set nu
 set number
-set nocompatible
 set backspace=indent,eol,start " backspace over everything in insert mode
 set syntax=whitespace
 
@@ -82,6 +83,12 @@ fun! CleanExtraSpaces()
     call setreg('/', old_query)
 endfun
 
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
 set cursorline          " highlight current line
 
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
@@ -124,7 +131,10 @@ Plugin 'tpope/vim-cucumber'
 Plugin 'rhysd/vim-crystal'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'tpope/vim-dotenv'
+Plugin 'ervandew/supertab'
 Plugin 'markcornick/vim-kitchen'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'kien/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -141,3 +151,5 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+syntax enable
+filetype plugin indent on
