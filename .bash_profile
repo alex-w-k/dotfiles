@@ -18,7 +18,7 @@ alias ~="cd ~"                                  # Go home and whatnot
 alias bp="vim ~/.bash_profile"                  # Edit this file
 alias src="source ~/.bash_profile"              # Reload this file!
 alias ls='ls -GFh'
-alias config='/usr/bin/git --git-dir=/Users/alexkoch/.cfg/ --work-tree=/Users/alexkoch'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 # ---------------------------------------------------------------------------
 # Colorize!
 # ---------------------------------------------------------------------------
