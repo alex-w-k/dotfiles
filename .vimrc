@@ -123,6 +123,11 @@ endfunction
 
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
+" Rust vim stuff:
+
+let g:rust_clip_command = 'pbcopy'
+let g:rustfmt_autosave = 1
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -165,6 +170,9 @@ Plugin 'ervandew/supertab'
 Plugin 'markcornick/vim-kitchen'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
+Plugin 'rust-lang/rust.vim'
+Plugin 'mattn/webapi-vim'
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

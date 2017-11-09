@@ -19,6 +19,11 @@ alias bp="vim ~/.bash_profile"                  # Edit this file
 alias src="source ~/.bash_profile"              # Reload this file!
 alias ls='ls -GFh'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+mkcdir ()
+{
+    mkdir -p -- "$1" &&
+      cd -P -- "$1"
+}
 # ---------------------------------------------------------------------------
 # Colorize!
 # ---------------------------------------------------------------------------
