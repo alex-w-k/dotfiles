@@ -1,3 +1,4 @@
+execute pathogen#infect()
 syntax on
 set nocompatible
 filetype off
@@ -5,27 +6,20 @@ filetype off
 autocmd Filetype html setlocal ts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sw=2
+autocmd BufNewFile,BufRead *_spec.rb set syntax=rspec
+autocmd BufNewFile,BufRead *_test.rb set syntax=rspec
+autocmd BufNewFile,BufRead */controls/*.rb set syntax=rspec
+autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
 set tabstop=2 shiftwidth=2 softtabstop=2
 set autoindent  " indent on enter
 set smartindent " do smart indenting when starting a new line
 set shiftround  " indent to the closest shiftwidth
 
-let &t_SI .= "\<Esc>[?2004h"
-let &t_EI .= "\<Esc>[?2004l"
+set background=dark
+colorscheme gruvbox
 
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-
-if has('unix')
-  function! XTermPasteBegin()
-    set pastetoggle=<Esc>[201~
-    set paste
-    return ""
-  endfunction
-endif
-
-autocmd BufNewFile,BufRead *_spec.rb set syntax=rspec
-autocmd BufNewFile,BufRead *_test.rb set syntax=rspec
-autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
+syntax enable
+filetype plugin indent on
 
 set nu
 set number
@@ -133,6 +127,7 @@ let g:rustfmt_autosave = 1
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'morhetz/gruvbox'
 Bundle 'vim-ruby/vim-ruby'
 Plugin 'nelsyeung/twig.vim'
 Plugin 'scrooloose/nerdtree'
@@ -155,15 +150,15 @@ Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'tmhedberg/matchit'
 Plugin 'groenewege/vim-less'
 Plugin 'vim-syntastic/syntastic'
-Plugin 'tomtom/tlib_vim'
 Plugin 'ecomba/vim-ruby-refactoring'
-Plugin 'garbas/vim-snipmate'
 Plugin 'tomlion/vim-solidity'
 Plugin 'tpope/vim-surround'
 Plugin 'skalnik/vim-vroom'
-Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tpope/vim-bundler'
-Plugin 'vadv/vim-chef'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "vadv/vim-chef"
 Plugin 'tpope/vim-cucumber'
 Plugin 'rhysd/vim-crystal'
 Plugin 'ekalinin/Dockerfile.vim'
@@ -175,6 +170,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'fatih/vim-go'
+Plugin 'hashivim/vim-terraform'
+Plugin 'bfontaine/Brewfile.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -190,6 +187,3 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-
-syntax enable
-filetype plugin indent on
