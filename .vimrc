@@ -119,10 +119,27 @@ endfunction
 
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_jump = 0
+let g:syntastic_ruby_checkers = ['rubocop', 'mri', 'jruby']
+let g:syntastic_ruby_rubocop_exec = '/usr/local/bin/cookstyle'
+
 " Rust vim stuff:
 
 let g:rust_clip_command = 'pbcopy'
 let g:rustfmt_autosave = 1
+
+" Automatically start NERDTree
+autocmd VimEnter * NERDTree
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -172,6 +189,7 @@ Plugin 'mattn/webapi-vim'
 Plugin 'fatih/vim-go'
 Plugin 'hashivim/vim-terraform'
 Plugin 'bfontaine/Brewfile.vim'
+Plugin 'vim-scripts/bats.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
