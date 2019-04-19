@@ -8,8 +8,8 @@ autocmd Filetype ruby setlocal ts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sw=2
 autocmd BufNewFile,BufRead *_spec.rb set syntax=rspec
 autocmd BufNewFile,BufRead *_test.rb set syntax=rspec
-autocmd BufNewFile,BufRead */controls/*.rb set syntax=rspec
-autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
+" autocmd BufNewFile,BufRead */controls/*.rb set syntax=rspec
+" autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
 set tabstop=2 shiftwidth=2 softtabstop=2
 set autoindent  " indent on enter
 set smartindent " do smart indenting when starting a new line
@@ -141,67 +141,53 @@ let g:rustfmt_autosave = 1
 " Automatically start NERDTree
 autocmd VimEnter * NERDTree
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'morhetz/gruvbox'
-Bundle 'vim-ruby/vim-ruby'
-Plugin 'nelsyeung/twig.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'jreybert/vimagit'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-ragtag'
-Plugin 'tpope/vim-rvm'
-Plugin 'pangloss/vim-javascript'
-Plugin 'keith/rspec.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'tmhedberg/matchit'
-Plugin 'groenewege/vim-less'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'ecomba/vim-ruby-refactoring'
-Plugin 'tomlion/vim-solidity'
-Plugin 'tpope/vim-surround'
-Plugin 'skalnik/vim-vroom'
-Plugin 'tpope/vim-bundler'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "vadv/vim-chef"
-Plugin 'tpope/vim-cucumber'
-Plugin 'rhysd/vim-crystal'
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'tpope/vim-dotenv'
-Plugin 'ervandew/supertab'
-Plugin 'markcornick/vim-kitchen'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'kien/ctrlp.vim'
-Plugin 'rust-lang/rust.vim'
-Plugin 'mattn/webapi-vim'
-Plugin 'fatih/vim-go'
-Plugin 'hashivim/vim-terraform'
-Plugin 'bfontaine/Brewfile.vim'
-Plugin 'vim-scripts/bats.vim'
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+Plug 'morhetz/gruvbox'
+Plug 'vim-ruby/vim-ruby'
+Plug 'nelsyeung/twig.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'jreybert/vimagit'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-rvm'
+Plug 'pangloss/vim-javascript'
+Plug 'keith/rspec.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'tmhedberg/matchit'
+Plug 'groenewege/vim-less'
+Plug 'vim-syntastic/syntastic'
+Plug 'ecomba/vim-ruby-refactoring'
+Plug 'tomlion/vim-solidity'
+Plug 'tpope/vim-surround'
+Plug 'skalnik/vim-vroom'
+Plug 'tpope/vim-bundler'
+Plug 'alex-w-k/vim-chef'
+Plug 'tpope/vim-cucumber'
+Plug 'rhysd/vim-crystal'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'tpope/vim-dotenv'
+Plug 'ervandew/supertab'
+Plug 'markcornick/vim-kitchen'
+Plug 'kchmck/vim-coffee-script'
+Plug 'rust-lang/rust.vim'
+Plug 'mattn/webapi-vim'
+Plug 'fatih/vim-go'
+Plug 'hashivim/vim-terraform'
+Plug 'bfontaine/Brewfile.vim'
+Plug 'vim-scripts/bats.vim'
+Plug 'junegunn/vader.vim',  { 'on': 'Vader', 'for': 'vader' }
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" Initialize plugin system
+call plug#end()

@@ -5,7 +5,7 @@
 # ---------------------------------------------------------------------------
 # Homebrew
 # ---------------------------------------------------------------------------
-alias brewup='brew update; brew upgrade; brew prune; brew cleanup; brew doctor'
+alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
 # ---------------------------------------------------------------------------
 # Useful terminal aliases
 # ---------------------------------------------------------------------------
@@ -77,3 +77,5 @@ alias st='speedtest-cli'
 # Shit that gets added by other programs
 # ---------------------------------------------------------------------------
 eval "$(chef shell-init bash)"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
