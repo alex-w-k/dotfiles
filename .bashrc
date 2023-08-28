@@ -15,6 +15,7 @@ alias ..="cd .."                                # Even faster if I want it
 alias ~="cd ~"                                  # Go home and whatnot
 alias ls='ls -GFh'
 alias ll='exa -abghHlS --git'
+alias src='source'
 mkcdir ()
 {
     mkdir -p -- "$1" &&
@@ -59,6 +60,12 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # ---------------------------------------------------------------------------
 
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+
+# ---------------------------------------------------------------------------
+# nvim conversion
+# ---------------------------------------------------------------------------
+alias vim='nivm'
+alias oldvim='vim'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
