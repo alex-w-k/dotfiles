@@ -14,8 +14,8 @@ alias cd..="cd .."                              # I don't like spaces..
 alias ..="cd .."                                # Even faster if I want it
 alias ~="cd ~"                                  # Go home and whatnot
 alias ls='ls -GFh'
-alias ll='exa -abghHlS --git'
-alias src='source'
+alias ll='exa -aghHl --git --color auto --icons'
+alias src='source ~/.bashrc'
 mkcdir ()
 {
     mkdir -p -- "$1" &&
@@ -64,8 +64,14 @@ alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 # ---------------------------------------------------------------------------
 # nvim conversion
 # ---------------------------------------------------------------------------
-alias vim='nivm'
+alias vim='nvim'
 alias oldvim='vim'
+alias vimconfig='nvim ~/.config/nvim/init.vim'
+# ---------------------------------------------------------------------------
+# other
+# ---------------------------------------------------------------------------
+export LS_COLORS="$(vivid generate one-dark)"
+export EXA_COLORS="da=1;34"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
