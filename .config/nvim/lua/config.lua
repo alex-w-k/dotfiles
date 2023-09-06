@@ -1,27 +1,52 @@
 require('lualine').setup {
   extensions = { chadtree },
-  sections = { lualine_a = { 'g:coc_status', 'mode' } },
-}
-require("gruvbox").setup({
-  undercurl = true,
-  underline = true,
-  bold = true,
-  italic = {
-    strings = true,
-    comments = true,
-    operators = false,
-    folds = true,
+  options = {
+    theme = 'gruvbox_dark'
   },
-  strikethrough = true,
-  invert_selection = false,
-  invert_signs = false,
-  invert_tabline = false,
-  invert_intend_guides = false,
-  inverse = true, -- invert background for search, diffs, statuslines and errors
-  contrast = "", -- can be "hard", "soft" or empty string
-  palette_overrides = {},
-  overrides = {},
-  dim_inactive = false,
-  transparent_mode = false,
-})
-vim.cmd("colorscheme gruvbox")
+  sections = {
+    lualine_a = { 'g:coc_status', 'mode' },
+    lualine_d = {
+      {
+        'branch', 'diff', 'diagnostics',
+        -- Table of diagnostic sources, available sources are:
+        --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
+        -- or a function that returns a table as such:
+        --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
+        sources = { 'coc', 'ale', 'nvim_diagnostic' },
+
+        -- Displays diagnostics for the defined severity types
+        sections = { 'error', 'warn', 'info', 'hint' },
+
+        diagnostics_color = {
+          -- Same values as the general color option can be used here.
+          error = 'DiagnosticError', -- Changes diagnostics' error color.
+          warn  = 'DiagnosticWarn',  -- Changes diagnostics' warn color.
+          info  = 'DiagnosticInfo',  -- Changes diagnostics' info color.
+          hint  = 'DiagnosticHint',  -- Changes diagnostics' hint color.
+        },
+        symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
+        colored = true,           -- Displays diagnostics status in color if set to true.
+        update_in_insert = false, -- Update diagnostics in insert mode.
+        always_visible = false,   -- Show diagnostics even if there are none.
+      }
+    },
+  },
+}
+
+require('neorg').setup {
+    load = {
+        ["core.defaults"] = {}, -- Loads default behaviour
+        ["core.concealer"] = {}, -- Adds pretty icons to your documents
+        ["core.dirman"] = { -- Manages Neorg workspaces
+            config = {
+                workspaces = {
+                    notes = "~/notes",
+                },
+                default_workspace = 'notes',
+            },
+        },
+         ["core.journal"] = {
+          strategy = 'flat'
+        },
+    },
+}

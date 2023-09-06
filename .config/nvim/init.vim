@@ -36,7 +36,7 @@ Plug 'tpope/vim-dotenv' "Basic support for .env and Procfile
 Plug 'sheerun/vim-polyglot' "A solid language pack for Vim.
 Plug 'pangloss/vim-javascript' "Vastly improved Javascript indentation and syntax support
 Plug 'keith/rspec.vim' "Better rspec syntax highlighting for Vim
-" Plug 'vim-syntastic/syntastic' "Syntax checking hacks for vim
+Plug 'vim-syntastic/syntastic' "Syntax checking hacks for vim
 Plug 'dense-analysis/ale'
 Plug 'ecomba/vim-ruby-refactoring' "Refactoring tool for Ruby in vim!
 Plug 'skalnik/vim-vroom' "A vim plugin for running your Ruby tests
@@ -46,16 +46,20 @@ Plug 'ervandew/supertab' "tab completion
 Plug 'hashivim/vim-hashicorp-tools' "elf-contained and fairly explanatory agglomeration of HashiVim plugins
 Plug 'vim-scripts/bats.vim' "Syntax highlighting for Bats - Bash Automated Testing System
 Plug 'junegunn/vader.vim' "A simple Vimscript test framework
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-if has('macunix')
-  Plug 'ellisonleao/gruvbox.nvim'
-else
-  Plug 'morhetz/gruvbox'
-endif
+Plug 'morhetz/gruvbox'
+Plug 'rhysd/git-messenger.vim'
+Plug 'vim-denops/denops.vim'
+Plug 'skanehira/denops-docker.vim'
+Plug 'ekalinin/Dockerfile.vim'
 if has('nvim')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
+endif
+if has('nvim')
+  Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-neorg/neorg'
 endif
 
 " Initialize plugin system
@@ -66,15 +70,15 @@ call plug#end()
 filetype indent plugin on
 syntax on "syntax highlighting on
 
-if (empty($TMUX) && getenv('TERM_PROGRAM') != 'Apple_Terminal')
-  if (has("nvim"))
+if (empty($TMUX) && getenv('TERM_PROGRAM') !=? 'Apple_Terminal')
+  if (has('nvim'))
     "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   endif
   "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
   "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
-  if (has("termguicolors"))
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 
+  if (has('termguicolors'))
     set termguicolors
   endif
 endif
@@ -88,17 +92,21 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
-autocmd Filetype html setlocal ts=2 sw=2
-autocmd Filetype ruby setlocal ts=2 sw=2
-autocmd Filetype javascript setlocal ts=2 sw=2
-autocmd BufNewFile,BufRead *_spec.rb set syntax=rspec "set syntax for rspec files
-autocmd BufNewFile,BufRead *_test.rb set syntax=rspec "set syntax for rspec files
-au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
-au BufRead,BufNewFile */Ansible/*.yml set filetype=yaml.ansible
-au BufRead,BufNewFile *.yaml.j2 set ft=yaml.htmldjango
-au BufRead,BufNewFile *.yml.j2 set ft=yaml.htmldjango
-au BufRead,BufNewFile *.rb.j2 set ft=rb.htmldjango
-au BufRead,BufNewFile *.sql.j2 set ft=sql.htmldjango
+augroup syntaxes
+  autocmd Filetype html setlocal ts=2 sw=2
+  autocmd Filetype ruby setlocal ts=2 sw=2
+  autocmd Filetype javascript setlocal ts=2 sw=2
+  autocmd BufNewFile,BufRead *_spec.rb set syntax=rspec "set syntax for rspec files
+  autocmd BufNewFile,BufRead *_test.rb set syntax=rspec "set syntax for rspec files
+  autocmd BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
+  autocmd BufRead,BufNewFile */Ansible/*.yml set filetype=yaml.ansible
+  autocmd BufRead,BufNewFile */inventories/*/inventory* set filetype=ansible_hosts
+  autocmd BufRead,BufNewFile *.yaml.j2 set ft=yaml.htmldjango
+  autocmd BufRead,BufNewFile *.yml.j2 set ft=yaml.htmldjango
+  autocmd BufRead,BufNewFile *.rb.j2 set ft=rb.htmldjango
+  autocmd BufRead,BufNewFile *.sql.j2 set ft=sql.htmldjango
+  autocmd BufRead,BufNewFile *.norg set ft=norg
+augroup END
 set tabstop=2 shiftwidth=2 softtabstop=2 "default to 2 space tabs
 set autoindent  " indent on enter
 set smartindent " do smart indenting when starting a new line
@@ -154,8 +162,8 @@ set noswapfile    " no swap files
 set autoread
 
 "create undo dir if it doesn't exist
-if !isdirectory($HOME."/.local/share/nvim/undo")
-    call mkdir($HOME."/.local/share/nvim/undo", "", 0700)
+if !isdirectory($HOME.'/.local/share/nvim/undo')
+    call mkdir($HOME.'/.local/share/nvim/undo', '', 0700)
 endif
 set undofile            " Save undo's after file closes
 set undodir=~/.local/share/nvim/undo" where to save undo histories
@@ -164,7 +172,7 @@ set undoreload=10000    " number of lines to save for undo
 
 "clean up trailing whitespace on save
 fun! CleanExtraSpaces()
-    let save_cursor = getpos(".")
+    let save_cursor = getpos('.')
     let old_query = getreg('/')
     silent! %s/\s\+$//e
     call setpos('.', save_cursor)
@@ -182,7 +190,7 @@ set cursorline          " highlight current line
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
 function ToggleWrap()
   if &wrap
-    echo "Wrap OFF"
+    echo 'Wrap OFF'
     setlocal nowrap
     set virtualedit=all
     silent! nunmap <buffer> <Up>
@@ -194,7 +202,7 @@ function ToggleWrap()
     silent! iunmap <buffer> <Home>
     silent! iunmap <buffer> <End>
   else
-    echo "Wrap ON"
+    echo 'Wrap ON'
     setlocal wrap linebreak nolist
     set virtualedit=
     setlocal display+=lastline
@@ -228,9 +236,16 @@ endfunction
 
 " Automatically start NERDTree/CHADTree
 if !has('nvim')
-  autocmd VimEnter * NERDTree
+  augroup NERDTree
+    autocmd VimEnter * NERDTree
+  augroup END
 else
-  au VimEnter * CHADopen
+  augroup CHADtree
+    if expand('%:t') ==? 'init.vim'
+      cd ~/.config/nvim/
+    endif
+    au VimEnter * CHADopen
+  augroup END
 endif
 
 " ALE config
@@ -245,22 +260,24 @@ let b:ale_linters = {
 let g:ansible_goto_role_paths = './roles,../_common/roles'
 
 function! FindAnsibleRoleUnderCursor()
-  if exists("g:ansible_goto_role_paths")
+  if exists('g:ansible_goto_role_paths')
     let l:role_paths = g:ansible_goto_role_paths
   else
-    let l:role_paths = "./roles"
+    let l:role_paths = './roles'
   endif
-  let l:tasks_main = expand("<cfile>") . "/tasks/main.yml"
+  let l:tasks_main = expand('<cfile>') . '/tasks/main.yml'
   let l:found_role_path = findfile(l:tasks_main, l:role_paths)
-  if l:found_role_path == ""
-    echo l:tasks_main . " not found"
+  if l:found_role_path ==? ''
+    echo l:tasks_main . ' not found'
   else
-    execute "edit " . fnameescape(l:found_role_path)
+    execute 'edit ' . fnameescape(l:found_role_path)
   endif
 endfunction
 
-au BufRead,BufNewFile */ansible/*.yml nnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
-au BufRead,BufNewFile */ansible/*.yml vnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
+augroup ansible_role_cmd
+  au BufRead,BufNewFile */ansible/*.yml nnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
+  au BufRead,BufNewFile */ansible/*.yml vnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
+augroup END
 let g:ansible_unindent_after_newline = 1
 let g:ansible_template_syntaxes = { '*.rb.j2': 'ruby' }
 let g:ansible_template_syntaxes = { '*.sql.j2': 'sql' }
@@ -281,6 +298,26 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
+let g:ale_completion_enabled = 1
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+\  'ansible': ['ansible-lint', 'ansible-language-server'],
+\  'vim': ['vimls', 'vint'],
+\  'lua': ['lua-language-server'],
+\  'Dockerfile': ['dockerfile_lint', 'dockerlinter'],
+\  'docker-compose': ['docker-compose-langserver']
+\}
+let g:ale_use_neovim_diagnostics_api = 1
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
+let g:ale_completion_enabled = 1
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
+
+nmap <silent> <leader>gm :GitMessenger
+
 
 " Enable syntax highlighting
 if has('syntax')
@@ -290,3 +327,4 @@ if has('nvim')
   lua require('config')
   set mouse=
 endif
+
