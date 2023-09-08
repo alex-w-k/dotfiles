@@ -36,8 +36,8 @@ Plug 'tpope/vim-dotenv' "Basic support for .env and Procfile
 Plug 'sheerun/vim-polyglot' "A solid language pack for Vim.
 Plug 'pangloss/vim-javascript' "Vastly improved Javascript indentation and syntax support
 Plug 'keith/rspec.vim' "Better rspec syntax highlighting for Vim
-Plug 'vim-syntastic/syntastic' "Syntax checking hacks for vim
-Plug 'dense-analysis/ale'
+" Plug 'vim-syntastic/syntastic' "Syntax checking hacks for vim
+" Plug 'dense-analysis/ale'
 Plug 'ecomba/vim-ruby-refactoring' "Refactoring tool for Ruby in vim!
 Plug 'skalnik/vim-vroom' "A vim plugin for running your Ruby tests
 Plug 'alex-w-k/vim-chef' "my own chef/inspec syntax highlighting
@@ -47,6 +47,16 @@ Plug 'hashivim/vim-hashicorp-tools' "elf-contained and fairly explanatory agglom
 Plug 'vim-scripts/bats.vim' "Syntax highlighting for Bats - Bash Automated Testing System
 Plug 'junegunn/vader.vim' "A simple Vimscript test framework
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'mfussenegger/nvim-lint'
+Plug 'mhartington/formatter.nvim'
+Plug 'creativenull/efmls-configs-nvim', { 'tag': 'v1.*' } " tag is optional, but recommended
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'morhetz/gruvbox'
 Plug 'rhysd/git-messenger.vim'
@@ -113,6 +123,13 @@ set smartindent " do smart indenting when starting a new line
 set shiftround  " indent to the closest shiftwidth
 set termguicolors
 set nohlsearch
+augroup linters
+  autocmd BufWritePost * lua require('lint').try_lint()
+augroup END
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost * FormatWrite
+augroup END
 
 set background=dark "theme
 colorscheme gruvbox "theme
@@ -278,13 +295,11 @@ augroup ansible_role_cmd
   au BufRead,BufNewFile */ansible/*.yml nnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
   au BufRead,BufNewFile */ansible/*.yml vnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
 augroup END
-let g:ansible_unindent_after_newline = 1
-let g:ansible_template_syntaxes = { '*.rb.j2': 'ruby' }
-let g:ansible_template_syntaxes = { '*.sql.j2': 'sql' }
-let g:ansible_template_syntaxes = { '*.yml.j2': 'yaml' }
-let g:ansible_template_syntaxes = { '*.yaml.j2': 'yaml' }
-let g:ansible_template_syntaxes = { 'docker-compose.j2': 'yaml' }
 
+" coc-ansible config
+let g:coc_filetype_map = {
+  \ 'yaml.ansible': 'ansible',
+  \ }
 " telescope config
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -327,4 +342,3 @@ if has('nvim')
   lua require('config')
   set mouse=
 endif
-

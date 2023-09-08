@@ -16,6 +16,7 @@ alias ~="cd ~"                                  # Go home and whatnot
 alias ls='ls -GFh'
 alias ll='exa -aghHl --git --color auto --icons'
 alias src='source ~/.bashrc'
+alias pip='pip3'
 mkcdir ()
 {
     mkdir -p -- "$1" &&
@@ -75,3 +76,7 @@ export EXA_COLORS="da=1;34"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
