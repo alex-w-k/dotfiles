@@ -36,8 +36,6 @@ Plug 'tpope/vim-dotenv' "Basic support for .env and Procfile
 Plug 'sheerun/vim-polyglot' "A solid language pack for Vim.
 Plug 'pangloss/vim-javascript' "Vastly improved Javascript indentation and syntax support
 Plug 'keith/rspec.vim' "Better rspec syntax highlighting for Vim
-" Plug 'vim-syntastic/syntastic' "Syntax checking hacks for vim
-" Plug 'dense-analysis/ale'
 Plug 'ecomba/vim-ruby-refactoring' "Refactoring tool for Ruby in vim!
 Plug 'skalnik/vim-vroom' "A vim plugin for running your Ruby tests
 Plug 'alex-w-k/vim-chef' "my own chef/inspec syntax highlighting
@@ -46,17 +44,21 @@ Plug 'ervandew/supertab' "tab completion
 Plug 'hashivim/vim-hashicorp-tools' "elf-contained and fairly explanatory agglomeration of HashiVim plugins
 Plug 'vim-scripts/bats.vim' "Syntax highlighting for Bats - Bash Automated Testing System
 Plug 'junegunn/vader.vim' "A simple Vimscript test framework
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'mfussenegger/nvim-lint'
-Plug 'mhartington/formatter.nvim'
-Plug 'creativenull/efmls-configs-nvim', { 'tag': 'v1.*' } " tag is optional, but recommended
+if has('nvim')
+  Plug 'williamboman/mason.nvim'
+  Plug 'williamboman/mason-lspconfig.nvim'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'saadparwaiz1/cmp_luasnip'
+  Plug 'L3MON4D3/LuaSnip'
+  Plug 'mfussenegger/nvim-lint'
+  Plug 'mhartington/formatter.nvim'
+  Plug 'creativenull/efmls-configs-nvim', { 'tag': 'v1.*' } " tag is optional, but recommended
+endif
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'morhetz/gruvbox'
 Plug 'rhysd/git-messenger.vim'
@@ -87,7 +89,7 @@ if (empty($TMUX) && getenv('TERM_PROGRAM') !=? 'Apple_Terminal')
   endif
   "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
   "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
   if (has('termguicolors'))
     set termguicolors
   endif
@@ -157,8 +159,10 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-au BufWritePost .vimrc so $MYVIMRC
-au BufWritePost init.vim so $MYVIMRC
+augroup autoloadvimrc
+  au BufWritePost .vimrc so $MYVIMRC
+  au BufWritePost init.vim so $MYVIMRC
+augroup END
 
 set ls=2  " show a status line even if there's only one window
 
