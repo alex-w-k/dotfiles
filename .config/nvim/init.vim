@@ -1,8 +1,7 @@
 set nocompatible "always iMproved
 
 " Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
+" - For Neovim: ~/.local/share/nvim/plugged Avoid using standard Vim directory names like 'plugin' call plug#begin()
 call plug#begin()
 Plug 'vim-ruby/vim-ruby' "Ruby syntax highlighting
 if !has('nvim')
@@ -10,10 +9,9 @@ if !has('nvim')
   Plug 'Xuyuanp/nerdtree-git-plugin' "A plugin of NERDTree showing git status
 else
   Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-  Plug 'nvim-lua/plenary.nvim',
-  Plug 'nvim-tree/nvim-web-devicons', " not strictly required, but recommended
-  Plug 'MunifTanjim/nui.nvim',
-  Plug 'nvim-neo-tree/neo-tree.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-tree/nvim-web-devicons' " not strictly required, but recommended
+  Plug 'MunifTanjim/nui.nvim' " UI Component Library for Neovim.
 endif
 Plug 'airblade/vim-gitgutter' "shows a git diff in the gutter (sign column)
 if !has('nvim')
@@ -33,54 +31,59 @@ Plug 'tpope/vim-rvm' "Switch Ruby versions from inside Vim
 Plug 'tpope/vim-surround' "quoting/parenthesizing made simple
 Plug 'tpope/vim-bundler' "Lightweight support for Ruby's Bundler
 Plug 'tpope/vim-dotenv' "Basic support for .env and Procfile
-Plug 'sheerun/vim-polyglot' "A solid language pack for Vim.
-Plug 'pangloss/vim-javascript' "Vastly improved Javascript indentation and syntax support
+if !has('nvim')
+  Plug 'sheerun/vim-polyglot' "A solid language pack for Vim.
+endif
 Plug 'keith/rspec.vim' "Better rspec syntax highlighting for Vim
 Plug 'ecomba/vim-ruby-refactoring' "Refactoring tool for Ruby in vim!
 Plug 'skalnik/vim-vroom' "A vim plugin for running your Ruby tests
 Plug 'alex-w-k/vim-chef' "my own chef/inspec syntax highlighting
 Plug 'ekalinin/Dockerfile.vim' "Vim syntax file & snippets for Docker's Dockerfile
-Plug 'ervandew/supertab' "tab completion
 Plug 'hashivim/vim-hashicorp-tools' "elf-contained and fairly explanatory agglomeration of HashiVim plugins
 Plug 'vim-scripts/bats.vim' "Syntax highlighting for Bats - Bash Automated Testing System
 Plug 'junegunn/vader.vim' "A simple Vimscript test framework
+Plug 'pearofducks/ansible-vim' "A vim plugin for syntax highlighting Ansible's common filetypes
+Plug 'arouene/vim-ansible-vault', { 'for': ['yaml', 'yaml.ansible'] } "Vault and Unvault inline values of Yaml files
 if has('nvim')
-  Plug 'williamboman/mason.nvim'
-  Plug 'williamboman/mason-lspconfig.nvim'
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/cmp-nvim-lsp'
-  Plug 'hrsh7th/cmp-buffer'
-  Plug 'hrsh7th/cmp-path'
-  Plug 'hrsh7th/cmp-cmdline'
-  Plug 'hrsh7th/nvim-cmp'
-  Plug 'saadparwaiz1/cmp_luasnip'
-  Plug 'L3MON4D3/LuaSnip'
-  Plug 'mfussenegger/nvim-lint'
-  Plug 'mhartington/formatter.nvim'
-  Plug 'creativenull/efmls-configs-nvim', { 'tag': 'v1.*' } " tag is optional, but recommended
+  Plug 'williamboman/mason.nvim' "Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters.
+  Plug 'williamboman/mason-lspconfig.nvim' "Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim.
+  Plug 'neovim/nvim-lspconfig' "Quickstart configs for Nvim LSP
+  Plug 'hrsh7th/cmp-nvim-lsp' "nvim-cmp source for neovim builtin LSP client
+  Plug 'hrsh7th/cmp-buffer' "nvim-cmp source for buffer words
+  Plug 'hrsh7th/cmp-path' "nvim-cmp source for path
+  Plug 'hrsh7th/cmp-cmdline' "nvim-cmp source for vim's cmdline
+  Plug 'hrsh7th/nvim-cmp' "A completion plugin for neovim coded in Lua.
+  Plug 'saadparwaiz1/cmp_luasnip' "luasnip completion source for nvim-cmp
+  Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'} "Snippet Engine for Neovim written in Lua.
+  Plug 'mfussenegger/nvim-lint' "An asynchronous linter plugin for Neovim complementary to the built-in Language Server Protocol support.
+  Plug 'mhartington/formatter.nvim' "A format runner for Neovim.
+  Plug 'creativenull/efmls-configs-nvim', { 'tag': 'v1.*' } "An unofficial collection of linters and formatters configured for efm-langserver for neovim.
 endif
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'morhetz/gruvbox'
-Plug 'rhysd/git-messenger.vim'
-Plug 'vim-denops/denops.vim'
-Plug 'skanehira/denops-docker.vim'
-Plug 'ekalinin/Dockerfile.vim'
 if has('nvim')
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
+  Plug 'ellisonleao/gruvbox.nvim' "lua gruvbox
+else
+  Plug 'morhetz/gruvbox' "pretty theme
+endif
+Plug 'rhysd/git-messenger.vim' "Vim and Neovim plugin to reveal the commit messages under the cursor <leader>gm
+Plug 'vim-denops/denops.vim' "🐜 An ecosystem of Vim/Neovim which allows developers to write cross-platform plugins in Deno
+Plug 'skanehira/denops-docker.vim' "Manage Docker in Vim/Neovim
+Plug 'ekalinin/Dockerfile.vim' "Vim syntax file & snippets for Docker's Dockerfile
+if has('nvim')
+  Plug 'nvim-lua/plenary.nvim' "plenary: full; complete; entire; absolute; unqualified. All the lua functions I don't want to write twice.
+  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' } "Find, Filter, Preview, Pick. All lua, all the time.
 endif
 if has('nvim')
-  Plug 'nvim-treesitter/nvim-treesitter'
-  Plug 'nvim-neorg/neorg'
+  Plug 'nvim-treesitter/nvim-treesitter' "Nvim Treesitter configurations and abstraction layer (syntax highlighting)
+  Plug 'nvim-neorg/neorg' "Modernity meets insane extensibility. The future of organizing your life in Neovim. (rethinking orgmode)
+  Plug 'aserowy/tmux.nvim' "tmux integration for nvim features pane movement and resizing from within nvim.
 endif
+Plug 'mtdl9/vim-log-highlighting'
 
 " Initialize plugin system
 call plug#end()
 
-" lua require('config')
-
 filetype indent plugin on
-syntax on "syntax highlighting on
 
 if (empty($TMUX) && getenv('TERM_PROGRAM') !=? 'Apple_Terminal')
   if (has('nvim'))
@@ -96,13 +99,51 @@ if (empty($TMUX) && getenv('TERM_PROGRAM') !=? 'Apple_Terminal')
 endif
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+
+
+augroup vim_plug_autoinstaller
+  if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
+  autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+    \| PlugInstall --sync | source $MYVIMRC
+  \| endif
+augroup END
+
+function! IsWSL()
+  if has('unix')
+    if filereadable('/proc/version')
+      let lines = readfile('/proc/version')
+      if lines[0] =~? 'Microsoft'
+        return 1
+      endif
+    endif
+  endif
+  return 0
+endfunction
+
+if (IsWSL())
+  let g:clipboard = {
+  \   'name': 'WslClipboard',
+  \   'copy': {
+  \      '+': 'clip.exe',
+  \      '*': 'clip.exe',
+  \    },
+  \   'paste': {
+  \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  \   },
+  \   'cache_enabled': 0,
+  \ }
 endif
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif
+
+vnoremap <Leader>y "+y
+
+" Ansible-Vault
+nnoremap <Leader>av :AnsibleVault<CR>
+nnoremap <Leader>au :AnsibleUnvault<CR>
+let g:ansible_vault_password_file='/home/akoch/pw1'
 
 augroup syntaxes
   autocmd Filetype html setlocal ts=2 sw=2
@@ -110,6 +151,8 @@ augroup syntaxes
   autocmd Filetype javascript setlocal ts=2 sw=2
   autocmd BufNewFile,BufRead *_spec.rb set syntax=rspec "set syntax for rspec files
   autocmd BufNewFile,BufRead *_test.rb set syntax=rspec "set syntax for rspec files
+  autocmd BufRead,BufNewFile .ansible-lint set filetype=yaml
+  autocmd BufRead,BufNewFile */yamllint/config set filetype=yaml
   autocmd BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
   autocmd BufRead,BufNewFile */Ansible/*.yml set filetype=yaml.ansible
   autocmd BufRead,BufNewFile */inventories/*/inventory* set filetype=ansible_hosts
@@ -118,23 +161,21 @@ augroup syntaxes
   autocmd BufRead,BufNewFile *.rb.j2 set ft=rb.htmldjango
   autocmd BufRead,BufNewFile *.sql.j2 set ft=sql.htmldjango
   autocmd BufRead,BufNewFile *.norg set ft=norg
+  autocmd BufNewFile,BufRead *.bicep set filetype=bicep
 augroup END
+
 set tabstop=2 shiftwidth=2 softtabstop=2 "default to 2 space tabs
+set foldlevel=99
 set autoindent  " indent on enter
 set smartindent " do smart indenting when starting a new line
 set shiftround  " indent to the closest shiftwidth
 set termguicolors
 set nohlsearch
-augroup linters
-  autocmd BufWritePost * lua require('lint').try_lint()
-augroup END
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost * FormatWrite
-augroup END
 
 set background=dark "theme
-colorscheme gruvbox "theme
+if !has('nvim')
+  colorscheme gruvbox "theme
+endif
 
 syntax enable "enable syntax after setting rules
 filetype plugin indent on "set filetype detecting after setting rules
@@ -164,7 +205,7 @@ augroup autoloadvimrc
   au BufWritePost init.vim so $MYVIMRC
 augroup END
 
-set ls=2  " show a status line even if there's only one window
+set laststatus=2  " show a status line even if there's only one window
 
 " Improve vim's scrolling speed
 if !has('nvim')
@@ -190,15 +231,6 @@ set undofile            " Save undo's after file closes
 set undodir=~/.local/share/nvim/undo" where to save undo histories
 set undolevels=1000     " How many undos
 set undoreload=10000    " number of lines to save for undo
-
-"clean up trailing whitespace on save
-fun! CleanExtraSpaces()
-    let save_cursor = getpos('.')
-    let old_query = getreg('/')
-    silent! %s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
-endfun
 
 " RSpec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -269,15 +301,6 @@ else
   augroup END
 endif
 
-" ALE config
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace']}
-
-let b:ale_linters = {
-\   'asnible': ['ansible-lint', 'ansible-language-server'],
-\   'python':  ['prospector'],
-\   'lua':     ['lua-language-server'],
-\ }
-" vim-ansible things
 let g:ansible_goto_role_paths = './roles,../_common/roles'
 
 function! FindAnsibleRoleUnderCursor()
@@ -299,11 +322,13 @@ augroup ansible_role_cmd
   au BufRead,BufNewFile */ansible/*.yml nnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
   au BufRead,BufNewFile */ansible/*.yml vnoremap <leader>gr :call FindAnsibleRoleUnderCursor()<CR>
 augroup END
+let g:ansible_unindent_after_newline = 1
+let g:ansible_template_syntaxes = { '*.rb.j2': 'ruby' }
+let g:ansible_template_syntaxes = { '*.sql.j2': 'sql' }
+let g:ansible_template_syntaxes = { '*.yml.j2': 'yaml' }
+let g:ansible_template_syntaxes = { '*.yaml.j2': 'yaml' }
+let g:ansible_template_syntaxes = { 'docker-compose.j2': 'yaml' }
 
-" coc-ansible config
-let g:coc_filetype_map = {
-  \ 'yaml.ansible': 'ansible',
-  \ }
 " telescope config
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -317,24 +342,6 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
-let g:ale_completion_enabled = 1
-let g:ale_linters_explicit = 1
-let g:ale_linters = {
-\  'ansible': ['ansible-lint', 'ansible-language-server'],
-\  'vim': ['vimls', 'vint'],
-\  'lua': ['lua-language-server'],
-\  'Dockerfile': ['dockerfile_lint', 'dockerlinter'],
-\  'docker-compose': ['docker-compose-langserver']
-\}
-let g:ale_use_neovim_diagnostics_api = 1
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\}
-let g:ale_completion_enabled = 1
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-nmap <silent> <leader>aj :ALENext<cr>
-nmap <silent> <leader>ak :ALEPrevious<cr>
-
 nmap <silent> <leader>gm :GitMessenger
 
 
@@ -342,6 +349,7 @@ nmap <silent> <leader>gm :GitMessenger
 if has('syntax')
   syntax on
 endif
+
 if has('nvim')
   lua require('config')
   set mouse=
