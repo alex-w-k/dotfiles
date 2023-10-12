@@ -69,6 +69,8 @@ Plug 'rhysd/git-messenger.vim' "Vim and Neovim plugin to reveal the commit messa
 Plug 'vim-denops/denops.vim' "🐜 An ecosystem of Vim/Neovim which allows developers to write cross-platform plugins in Deno
 Plug 'skanehira/denops-docker.vim' "Manage Docker in Vim/Neovim
 Plug 'ekalinin/Dockerfile.vim' "Vim syntax file & snippets for Docker's Dockerfile
+Plug 'pedrohdz/vim-yaml-folds' " YAML folding
+Plug 'cuducos/yaml.nvim' " YAML toolkit
 if has('nvim')
   Plug 'nvim-lua/plenary.nvim' "plenary: full; complete; entire; absolute; unqualified. All the lua functions I don't want to write twice.
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' } "Find, Filter, Preview, Pick. All lua, all the time.
