@@ -47,6 +47,7 @@ alias gpo='git push origin '
 alias gti='git '
 alias got='git '
 alias get='git '
+alias gpm='git profile-manager'
 # ---------------------------------------------------------------------------
 # macOS things
 # ---------------------------------------------------------------------------

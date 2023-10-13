@@ -74,6 +74,9 @@ if has('nvim')
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' } "Find, Filter, Preview, Pick. All lua, all the time.
 endif
 if has('nvim')
+  Plug 'folke/neodev.nvim'
+endif
+if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter' "Nvim Treesitter configurations and abstraction layer (syntax highlighting)
   Plug 'nvim-neorg/neorg' "Modernity meets insane extensibility. The future of organizing your life in Neovim. (rethinking orgmode)
   Plug 'aserowy/tmux.nvim' "tmux integration for nvim features pane movement and resizing from within nvim.
