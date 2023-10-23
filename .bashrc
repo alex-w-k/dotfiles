@@ -14,7 +14,7 @@ alias cd..="cd .."                              # I don't like spaces..
 alias ..="cd .."                                # Even faster if I want it
 alias ~="cd ~"                                  # Go home and whatnot
 alias ls='ls -GFh'
-alias ll='exa -aghHl --git --color auto --icons'
+alias ll='eza -aghHl --git --color auto --icons'
 alias src='source ~/.bashrc'
 alias pip='pip3'
 mkcdir ()
@@ -47,6 +47,9 @@ alias gpo='git push origin '
 alias gti='git '
 alias got='git '
 alias get='git '
+alias gpob='git push --set-upstream origin "$(git rev-parse --abbrev-ref HEAD)"'
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
 # ---------------------------------------------------------------------------
 # macOS things
 # ---------------------------------------------------------------------------
