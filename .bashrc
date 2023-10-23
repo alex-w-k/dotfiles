@@ -14,7 +14,7 @@ alias cd..="cd .."                              # I don't like spaces..
 alias ..="cd .."                                # Even faster if I want it
 alias ~="cd ~"                                  # Go home and whatnot
 alias ls='ls -GFh'
-alias ll='exa -aghHl --git --color auto --icons'
+alias ll='eza -aghHl --git --color auto --icons'
 alias src='source ~/.bashrc'
 alias pip='pip3'
 mkcdir ()
@@ -48,15 +48,14 @@ alias gti='git '
 alias got='git '
 alias get='git '
 alias gpm='git profile-manager'
+alias gpob='git push origin "$(git symbolic-ref --short HEAD)"'
 # ---------------------------------------------------------------------------
 # macOS things
 # ---------------------------------------------------------------------------
 alias st='speedtest-cli'
 alias sshilo='ssh -oKexAlgorithms=+diffie-hellman-group14-sha1 -oHostKeyAlgorithms=+ssh-dss 192.168.1.101'
 export BASH_SILENCE_DEPRECATION_WARNING=1
-. "$HOME/.cargo/env"
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
 # ---------------------------------------------------------------------------
 # config dir things
 # ---------------------------------------------------------------------------
@@ -72,7 +71,8 @@ alias vimconfig='nvim ~/.config/nvim/init.vim'
 # ---------------------------------------------------------------------------
 # other
 # ---------------------------------------------------------------------------
-export LS_COLORS="$(vivid generate one-dark)"
+onedark="$(vivid generate one-dark)"
+export LS_COLORS=$onedark
 export EXA_COLORS="da=1;34"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
