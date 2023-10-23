@@ -72,6 +72,7 @@ alias vimconfig='nvim ~/.config/nvim/init.vim'
 # ---------------------------------------------------------------------------
 # other
 # ---------------------------------------------------------------------------
+eval "$(/opt/homebrew/bin/brew shellenv)"
 onedark="$(vivid generate one-dark)"
 export LS_COLORS=$onedark
 export EXA_COLORS="da=1;34"
