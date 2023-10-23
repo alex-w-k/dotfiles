@@ -49,16 +49,14 @@ alias got='git '
 alias get='git '
 alias gpob='git push --set-upstream origin "$(git rev-parse --abbrev-ref HEAD)"'
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-
+alias gpm='git profile-manager'
 # ---------------------------------------------------------------------------
 # macOS things
 # ---------------------------------------------------------------------------
 alias st='speedtest-cli'
 alias sshilo='ssh -oKexAlgorithms=+diffie-hellman-group14-sha1 -oHostKeyAlgorithms=+ssh-dss 192.168.1.101'
 export BASH_SILENCE_DEPRECATION_WARNING=1
-. "$HOME/.cargo/env"
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
 # ---------------------------------------------------------------------------
 # config dir things
 # ---------------------------------------------------------------------------
@@ -74,7 +72,8 @@ alias vimconfig='nvim ~/.config/nvim/init.vim'
 # ---------------------------------------------------------------------------
 # other
 # ---------------------------------------------------------------------------
-export LS_COLORS="$(vivid generate one-dark)"
+onedark="$(vivid generate one-dark)"
+export LS_COLORS=$onedark
 export EXA_COLORS="da=1;34"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.

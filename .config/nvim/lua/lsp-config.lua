@@ -107,6 +107,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+local import_luasnip, luasnip = pcall(require, 'luasnip')
+if not import_luasnip then return end
 -- Set up nvim-cmp.
   local cmp = require'cmp'
 
@@ -127,6 +129,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        else
+          fallback()
+        end
+      end, {"i", "s"}),
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
