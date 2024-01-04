@@ -68,7 +68,23 @@ require("lspconfig").vale_ls.setup {
   }
 }
 require("lspconfig").vimls.setup {}
-require("lspconfig").yamlls.setup {}
+require("lspconfig").helm_ls.setup {
+  filetypes = {"helm"},
+  cmd = {"helm_ls", "serve"},
+}
+local home = os.getenv("HOME")
+require('lspconfig').yamlls.setup {
+  -- other configuration for setup {}
+  settings = {
+    yaml = {
+      -- other settings. note this overrides the lspconfig defaults.
+      schemas = {
+        ["https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible-lint-config.json"] = home .. "code/ansible/**",
+        ["https://json.schemastore.org/chart.json"] = home .. "code/helm/**",
+      },
+    },
+  }
+}
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)

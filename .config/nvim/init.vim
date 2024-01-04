@@ -84,6 +84,7 @@ if has('nvim')
   Plug 'aserowy/tmux.nvim' "tmux integration for nvim features pane movement and resizing from within nvim.
 endif
 Plug 'mtdl9/vim-log-highlighting'
+Plug 'towolf/vim-helm'
 
 " Initialize plugin system
 call plug#end()
@@ -161,10 +162,11 @@ augroup syntaxes
   autocmd BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
   autocmd BufRead,BufNewFile */Ansible/*.yml set filetype=yaml.ansible
   autocmd BufRead,BufNewFile */inventories/*/inventory* set filetype=ansible_hosts
-  autocmd BufRead,BufNewFile *.yaml.j2 set ft=yaml.htmldjango
-  autocmd BufRead,BufNewFile *.yml.j2 set ft=yaml.htmldjango
-  autocmd BufRead,BufNewFile *.rb.j2 set ft=rb.htmldjango
-  autocmd BufRead,BufNewFile *.sql.j2 set ft=sql.htmldjango
+  autocmd BufRead,BufNewFile *.yaml.j2 set ft=yaml.jinja2
+  autocmd BufRead,BufNewFile *.yml.j2 set ft=yaml.jinja2
+  autocmd BufRead,BufNewFile *.rb.j2 set ft=rb.jinja2
+  autocmd BufRead,BufNewFile *.sql.j2 set ft=sql.jinja2
+  autocmd BufRead,BufNewFile *.xml.j2 set ft=xml.jinja2
   autocmd BufRead,BufNewFile *.norg set ft=norg
   autocmd BufNewFile,BufRead *.bicep set filetype=bicep
 augroup END
