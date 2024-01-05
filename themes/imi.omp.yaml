@@ -9,59 +9,51 @@ blocks:
       macos: " "
       ubuntu: " "
       windows: " "
+      opensuse: " "
+      centos: " "
+      raspbian: " "
+      alpine: " "
     style: diamond
     template: " {{ if .WSL }}WSL at {{ end }}{{.Icon}}"
     trailing_diamond: "<transparent,#FEF5ED></>"
     type: os
-  - background: "#800080"
+  - background: "#502688"
     foreground: "#FEF5ED"
     leading_diamond: ""
-    trailing_diamond: "<transparent,#800080></>"
+    trailing_diamond: "<transparent,#502688></>"
     properties:
       time_format: '03:04:05 PM MST | Monday'
     style: diamond
     template: " ♥ {{ .CurrentDate | date .Format }} \uf073 "
     type: time
-  - background: "#c386f1"
+  - background: "#8F61DB"
     foreground: "#011627"
     leading_diamond: ""
-    trailing_diamond: "<transparent,#c386f1></>"
+    trailing_diamond: "<transparent,#8F61DB></>"
     style: diamond
-    template: " {{ if .SSHSession }}\uf817 {{ end }}{{ .UserName }}@{{ .HostName }} "
+    template: " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }}@{{ .HostName }} "
     type: session
-  - background: "#c386f1"
+  - background: "#8F61DB"
     foreground: "#011627"
     leading_diamond: ""
-    trailing_diamond: "<transparent,#c386f1></>"
+    trailing_diamond: "<transparent,#8F61DB></>"
     style: diamond
     template: " \uf489 {{ .Name }} "
     type: shell
-  - background: "#516BEB"
+  - background: "#DA70D6"
     foreground: "#ffffff"
     leading_diamond: ""
     style: diamond
     template: " CPU: {{ round .PhysicalPercentUsed .Precision }}% | "
     type: sysinfo
-  - background: "#516BEB"
+  - background: "#DA70D6"
     foreground: "#ffffff"
     style: diamond
     template: 'RAM: {{ (div ((sub .PhysicalTotalMemory .PhysicalFreeMemory)|float64)
       1073741824.0) }}/{{ (div .PhysicalTotalMemory 1073741824.0) }}GB  '
-    trailing_diamond: "<transparent,#516BEB></>"
+    trailing_diamond: "<transparent,#DA70D6></>"
     type: sysinfo
-  - background: "#ffffff"
-    foreground: "#000000"
-    leading_diamond: ""
-    trailing_diamond: "<transparent,#ffffff></>"
-    properties:
-      fetch_package_manager: true
-      npm_icon: " <#cc3a3a></> "
-      yarn_icon: " <#348cba></>"
-    style: diamond
-    template: " {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{
-      .Full }}"
-    type: node
-  - background: "#702963"
+  - background: "#2e36aa"
     foreground: "#ffffff"
     leading_diamond: ""
     trailing_diamond: ""
@@ -89,10 +81,10 @@ blocks:
     template: ' ❤ '
     style: diamond
     type: text
-  - background: "#800080"
+  - background: "#502688"
     foreground: "#FEF5ED"
     leading_diamond: ""
-    trailing_diamond: "<transparent,#800080></>"
+    trailing_diamond: "<transparent,#502688></>"
     properties:
       time_format: '03:04:05 PM MST'
     style: diamond
@@ -101,35 +93,35 @@ blocks:
   - type: docker
     style: diamond
     leading_diamond: ""
-    trailing_diamond: "<transparent,#DA70D6></>"
+    trailing_diamond: "<transparent,#EE4A90></>"
     foreground: "#000000"
-    background: "#DA70D6"
+    background: "#EE4A90"
   - type: kubectl
     style: diamond
     leading_diamond: ""
-    trailing_diamond: "<transparent,#DA70D6></>"
+    trailing_diamond: "<transparent,#EE4A90></>"
     foreground: "#000000"
-    background: "#DA70D6"
+    background: "#EE4A90"
     template: " 󱃾 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
   - type: helm
     style: diamond
     leading_diamond: ""
-    trailing_diamond: "<transparent,#DA70D6></>"
+    trailing_diamond: "<transparent,#EE4A90></>"
     foreground: "#000000"
-    background: "#DA70D6"
+    background: "#EE4A90"
   - type: aws
     style: diamond
     leading_diamond: ""
-    trailing_diamond: "<transparent,#DA70D6></>"
+    trailing_diamond: "<transparent,#EE4A90></>"
     foreground: "#000000"
-    background: "#DA70D6"
+    background: "#EE4A90"
     template: "  {{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
   - type: az
     style: diamond
     leading_diamond: ""
-    trailing_diamond: "<transparent,#DA70D6></>"
+    trailing_diamond: "<transparent,#EE4A90></>"
     foreground: "#000000"
-    background: "#DA70D6"
+    background: "#EE4A90"
     template: "  {{ .EnvironmentName }}"
   - background: "#575656"
     foreground: "#d6deeb"
@@ -159,7 +151,7 @@ blocks:
     properties:
       always_enabled: true
     style: plain
-    template: "  "
+    template: "   "
     type: status
   type: prompt
 console_title_template: "{{.UserName}}@{{.HostName}} using {{.Shell}} in {{ .Folder }}"
