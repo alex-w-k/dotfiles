@@ -6,13 +6,22 @@ blocks:
     foreground: "#011627"
     leading_diamond: ""
     properties:
-      macos: " "
-      ubuntu: " "
+      alpine: ' '
+      arch: ' '
+      centos: ' '
+      debian: ' '
+      elementary: ' '
+      fedora: ' '
+      gentoo: ' '
+      linux: ' '
+      macos: ' '
+      manjaro: ' '
+      mint: ' '
+      opensuse: ' '
+      raspbian: ' '
+      ubuntu: ' '
       windows: " "
-      opensuse: " "
-      centos: " "
-      raspbian: " "
-      alpine: " "
+      wsl: ' '
     style: diamond
     template: " {{ if .WSL }}WSL at {{ end }}{{.Icon}}"
     trailing_diamond: "<transparent,#FEF5ED></>"
