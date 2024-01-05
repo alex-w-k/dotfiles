@@ -180,4 +180,4 @@ export SCM_CHECK=true
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
-eval "$(oh-my-posh init bash --config themes/imi.omp.yaml)"
+eval "$(oh-my-posh init bash --config $HOME/themes/imi.omp.yaml)"
