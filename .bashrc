@@ -67,8 +67,7 @@ alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 # ---------------------------------------------------------------------------
 # nvim conversion
 # ---------------------------------------------------------------------------
-alias vim='nvim'
-alias oldvim='vim'
+alias vim='nvzshalias oldvim='vim'
 alias vimconfig='nvim ~/.config/nvim/init.vim'
 # ---------------------------------------------------------------------------
 # other

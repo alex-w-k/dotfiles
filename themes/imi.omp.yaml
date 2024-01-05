@@ -135,13 +135,21 @@ blocks:
   - background: "#575656"
     foreground: "#d6deeb"
     leading_diamond: ""
-    trailing_diamond: ""
+    trailing_diamond: "<transparent,#575656></>"
     properties:
       style: roundrock
       threshold: 0
     style: diamond
     template: " {{ .FormattedMs }} "
     type: executiontime
+  - background: "#575656"
+    foreground: "#d6deeb"
+    leading_diamond: ""
+    trailing_diamond: ""
+    style: diamond
+    properties:
+      always_enabled: true
+    type: status
   type: prompt
 - alignment: left
   newline: true
@@ -164,6 +172,7 @@ blocks:
     type: status
   type: prompt
 console_title_template: "{{.UserName}}@{{.HostName}} using {{.Shell}} in {{ .Folder }}"
+shell_integration: true
 transient_prompt:
   background: transparent
   foreground: "#FEF5ED"

@@ -73,7 +73,7 @@ Plug 'pedrohdz/vim-yaml-folds' " YAML folding
 Plug 'cuducos/yaml.nvim' " YAML toolkit
 if has('nvim')
   Plug 'nvim-lua/plenary.nvim' "plenary: full; complete; entire; absolute; unqualified. All the lua functions I don't want to write twice.
-  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' } "Find, Filter, Preview, Pick. All lua, all the time.
+  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' } "Find, Filter, Preview, Pick. All lua, all the time.
 endif
 if has('nvim')
   Plug 'folke/neodev.nvim'
@@ -84,7 +84,8 @@ if has('nvim')
   Plug 'aserowy/tmux.nvim' "tmux integration for nvim features pane movement and resizing from within nvim.
 endif
 Plug 'mtdl9/vim-log-highlighting'
-Plug 'towolf/vim-helm'
+Plug 'towolf/vim-helm', { 'for': ['helm'] }
+Plug 'dstein64/vim-startuptime'
 
 " Initialize plugin system
 call plug#end()
