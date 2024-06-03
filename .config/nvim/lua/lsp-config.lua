@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup {
-  ensure_installed = { "lua_ls", "ansiblels", "bashls", "bicep", "efm", "dockerls", "docker_compose_language_service", "vale_ls", "ruby_ls", "terraformls", "vimls", "yamlls"},
+  ensure_installed = { "lua_ls", "ansiblels", "bashls", "bicep", "efm", "dockerls", "docker_compose_language_service", "vale_ls", "ruby_lsp", "terraformls", "vimls", "yamlls"},
   automatic_installation = true,
 }
 
@@ -58,7 +58,7 @@ require('lspconfig').efm.setup(vim.tbl_extend('force', efmls_config, {
   -- capabilities = capabilities,
 }))
 require("lspconfig").lua_ls.setup {}
-require("lspconfig").ruby_ls.setup {}
+require("lspconfig").ruby_lsp.setup {}
 require("lspconfig").terraformls.setup {}
 require("lspconfig").vale_ls.setup {
   filetypes = {
@@ -72,19 +72,26 @@ require("lspconfig").helm_ls.setup {
   filetypes = {"helm"},
   cmd = {"helm_ls", "serve"},
 }
-local home = os.getenv("HOME")
-require('lspconfig').yamlls.setup {
-  -- other configuration for setup {}
-  settings = {
-    yaml = {
-      -- other settings. note this overrides the lspconfig defaults.
-      schemas = {
-        ["https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible-lint-config.json"] = home .. "code/ansible/**",
-        ["https://json.schemastore.org/chart.json"] = home .. "code/helm/**",
-      },
-    },
-  }
-}
+-- local home = os.getenv("HOME")
+local cfg = require("yaml-companion").setup({
+  -- Add any options here, or leave empty to use the default settings
+  -- lspconfig = {
+  --   cmd = {"yaml-language-server"}
+  -- },
+})
+require("lspconfig")["yamlls"].setup(cfg)
+-- require('lspconfig').yamlls.setup {
+--   -- other configuration for setup {}
+--   settings = {
+--     yaml = {
+--       -- other settings. note this overrides the lspconfig defaults.
+--       schemas = {
+--         ["https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible-lint-config.json"] = home .. "code/ansible/**",
+--         ["https://json.schemastore.org/chart.json"] = home .. "code/helm/**",
+--       },
+--     },
+--   }
+-- }
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)

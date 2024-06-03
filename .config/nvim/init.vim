@@ -86,6 +86,7 @@ endif
 Plug 'mtdl9/vim-log-highlighting'
 Plug 'towolf/vim-helm', { 'for': ['helm'] }
 Plug 'dstein64/vim-startuptime'
+Plug 'someone-stole-my-name/yaml-companion.nvim'
 
 " Initialize plugin system
 call plug#end()
